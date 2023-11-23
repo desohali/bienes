@@ -1,25 +1,426 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { useFormik } from 'formik'
+import * as Yup from "yup"
+import SaveIcon from '@mui/icons-material/Save';
+import { LoadingButton } from '@mui/lab';
+import swal from 'sweetalert';
+import AppBar from '@mui/material/AppBar';
+
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Chip, Divider, Box, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
+
+const formikBasicInformationSchema = Yup.object().shape({
+  // first part form
+  //dependencia: Yup.number().min(1, "Number of pieces too short!").max(9999, "Number of pieces too long!").required("Number of pieces is required!"),
+  dependencia: Yup.string().min(1, "dependencia es muy corto!").max(400, "dependencia es muy largo!").required("dependenncia es requerido!"),
+  responsable: Yup.string().min(1, "responsable es muy corto!").max(400, "responsable es muy largo!").required("responsable es requerido!"),
+  numeroEtiqueta: Yup.string().min(1, "numeroEtiqueta es muy corto!").max(400, "numeroEtiqueta es muy largo!").required("numeroEtiqueta es requerido!"),
+  marca: Yup.string().min(1, "marca es muy corto!").max(400, "marca es muy largo!").required("marca es requerido!"),
+  modelo: Yup.string().min(1, "modelo es muy corto!").max(400, "modelo es muy largo!").required("modelo es requerido!"),
+  serie: Yup.string().min(1, "serie es muy corto!").max(400, "serie es muy largo!").required("serie es requerido!"),
+  color: Yup.string().min(1, "color es muy corto!").max(400, "color es muy largo!").required("color es requerido!"),
+  dimensiones: Yup.string().min(1, "dimensiones es muy corto!").max(400, "dimensiones es muy largo!").required("dimensiones es requerido!"),
+  estado: Yup.string().min(1, "estado es muy corto!").max(400, "estado es muy largo!").required("estado es requerido!"),
+  observaciones: Yup.string().min(1, "observaciones es muy corto!").max(400, "observaciones es muy largo!").required("observaciones es requerido!"),
+  codigo: Yup.string().min(1, "codigo es muy corto!").max(400, "codigo es muy largo!").required("codigo es requerido!"),
+});
+
+const formikLoginSchema = Yup.object().shape({
+  // first part form
+  usuario: Yup.string().min(1, "usuario es muy corto!").max(400, "usuario es muy largo!").required("usuario es requerido!"),
+  clave: Yup.string().min(1, "contraseña es muy corto!").max(400, "contraseña es muy largo!").required("contraseña es requerido!"),
+});
+
+/* app.post("/listarEnventario", async (req, res) => {
+  let formData = await new helpers().parserFormidable(req),
+    fields = formData.fields,
+    files = formData.files;
+
+  const findParticipantes = await participanteModel.find({ inventariador: fields.inventariador });
+  res.json(findParticipantes);
+}); */
+
+
+
 
 function App() {
+
+  const listarEnventario = async () => {
+    const formData = new FormData();
+    formData.append("inventariador", localStorage.getItem("inventariador"));
+    const response = await fetch("https://yocreoquesipuedohacerlo.com/listarEnventario", {
+      method: "post",
+      body: formData
+    });
+    const json = await response.json();
+    return json;
+
+  };
+
+  const [list, setlist] = React.useState([]);
+console.log('list', list)
+  React.useEffect(() => {
+    (async () => {
+      if (localStorage.getItem("inventariador")) {
+        setlist(await listarEnventario());
+      }
+    })();
+  }, []);
+
+
+  // form basic information
+  const formikBasicInformation = useFormik({
+    validateOnMount: true,
+    initialValues: {
+      // first part form
+      dependencia: '',
+      responsable: '',
+      numeroEtiqueta: '',
+      marca: '',
+      modelo: '',
+      serie: '',
+      color: '',
+      dimensiones: '',
+      estado: '',
+      observaciones: '',
+      codigo: '',
+    },
+    validationSchema: formikBasicInformationSchema,
+    onSubmit: async (values) => {
+      try {
+        const formData = new FormData();
+        for (const key in values) {
+          formData.append(key, values[key].toString())
+        }
+        formData.append("inventariador", localStorage.getItem("inventariador"));
+        const response = await fetch("https://yocreoquesipuedohacerlo.com/enventario", {
+          method: "post",
+          body: formData
+        });
+        const json = await response.json();
+
+        formikBasicInformation.resetForm();
+        swal("", "SE REGISTRO CORRECTAMENTE !", "success");
+      } catch (error) {
+        swal("", "ERROR AL REGISTRAR, VUELVA A INTENTARLO GRACIAS !", "error");
+      }
+    },
+  });
+
+  // form basic information
+  const formikLogin = useFormik({
+    validateOnMount: true,
+    initialValues: {
+      // first part form
+      usuario: '',
+      clave: '',
+    },
+    validationSchema: formikLoginSchema,
+    onSubmit: async (values) => {
+      localStorage.setItem("inventariador", values.usuario);
+    },
+  });
+
+  if (!localStorage.getItem("inventariador")) {
+    return (
+      <Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" component="div" align='center' sx={{ flexGrow: 1 }}>
+                REGISTRO DE BIENES
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </Box>
+        <Box style={{ padding: '25px' }}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
+
+            <Grid item xs={12} sm={10} md={8} lg={6}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <TextField
+                    inputProps={{ maxLength: 100 }}
+                    fullWidth
+                    size="small"
+                    id='usuario'
+                    label='Usuario'
+                    variant='outlined'
+                    sx={{ mb: 0.5 }}
+                    value={formikLogin.values.usuario}
+                    onChange={formikLogin.handleChange}
+                    error={formikLogin.touched.usuario && Boolean(formikLogin.errors.usuario)}
+                    helperText={formikLogin.touched.usuario && formikLogin.errors.usuario}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <TextField
+                    inputProps={{ maxLength: 100 }}
+                    fullWidth
+                    size="small"
+                    id='clave'
+                    label='Contraseña'
+                    variant='outlined'
+                    sx={{ mb: 0.5 }}
+                    value={formikLogin.values.clave}
+                    onChange={formikLogin.handleChange}
+                    error={formikLogin.touched.clave && Boolean(formikLogin.errors.clave)}
+                    helperText={formikLogin.touched.clave && formikLogin.errors.clave}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <LoadingButton
+                    //disabled={!formikBasicInformation.isValid || formikBasicInformation.isSubmitting}
+                    color='primary'
+                    variant='contained'
+                    loading={formikLogin.isSubmitting}
+                    loadingPosition='start'
+                    startIcon={<SaveIcon />}
+                    onClick={async () => {
+                      await formikLogin.submitForm();
+                    }}>
+                    INGRESAR
+                  </LoadingButton>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
+          </Grid>
+        </Box>
+      </Box>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" align='center' sx={{ flexGrow: 1 }}>
+              REGISTRO DE BIENES
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Box style={{ padding: '25px' }}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
+
+          <Grid item xs={12} sm={10} md={8} lg={6}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='dependencia'
+                  label='Dependencia'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.dependencia}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.dependencia && Boolean(formikBasicInformation.errors.dependencia)}
+                  helperText={formikBasicInformation.touched.dependencia && formikBasicInformation.errors.dependencia}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='responsable'
+                  label='Responsable'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.responsable}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.responsable && Boolean(formikBasicInformation.errors.responsable)}
+                  helperText={formikBasicInformation.touched.responsable && formikBasicInformation.errors.responsable}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='numeroEtiqueta'
+                  label='Número Etiqueta'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.numeroEtiqueta}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.numeroEtiqueta && Boolean(formikBasicInformation.errors.numeroEtiqueta)}
+                  helperText={formikBasicInformation.touched.numeroEtiqueta && formikBasicInformation.errors.numeroEtiqueta}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='marca'
+                  label='Marca'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.marca}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.marca && Boolean(formikBasicInformation.errors.marca)}
+                  helperText={formikBasicInformation.touched.marca && formikBasicInformation.errors.marca}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='modelo'
+                  label='Modelo'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.modelo}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.modelo && Boolean(formikBasicInformation.errors.modelo)}
+                  helperText={formikBasicInformation.touched.modelo && formikBasicInformation.errors.modelo}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='serie'
+                  label='Serie'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.serie}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.serie && Boolean(formikBasicInformation.errors.serie)}
+                  helperText={formikBasicInformation.touched.serie && formikBasicInformation.errors.serie}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='color'
+                  label='Color'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.color}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.color && Boolean(formikBasicInformation.errors.color)}
+                  helperText={formikBasicInformation.touched.color && formikBasicInformation.errors.color}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='dimensiones'
+                  label='Dimensiones'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.dimensiones}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.dimensiones && Boolean(formikBasicInformation.errors.dimensiones)}
+                  helperText={formikBasicInformation.touched.dimensiones && formikBasicInformation.errors.dimensiones}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='estado'
+                  label='Estado'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.estado}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.estado && Boolean(formikBasicInformation.errors.estado)}
+                  helperText={formikBasicInformation.touched.estado && formikBasicInformation.errors.estado}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='observaciones'
+                  label='Observaciones'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.observaciones}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.observaciones && Boolean(formikBasicInformation.errors.observaciones)}
+                  helperText={formikBasicInformation.touched.observaciones && formikBasicInformation.errors.observaciones}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='codigo'
+                  label='Código'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.codigo}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.codigo && Boolean(formikBasicInformation.errors.codigo)}
+                  helperText={formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <LoadingButton
+                  //disabled={!formikBasicInformation.isValid || formikBasicInformation.isSubmitting}
+                  color='primary'
+                  variant='contained'
+                  loading={formikBasicInformation.isSubmitting}
+                  loadingPosition='start'
+                  startIcon={<SaveIcon />}
+                  onClick={async () => {
+                    await formikBasicInformation.submitForm();
+                  }}>
+                  REGISTRAR
+                </LoadingButton>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
+        </Grid>
+      </Box>
+    </Box>
+  )
 }
 
 export default App;
