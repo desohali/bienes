@@ -6,12 +6,16 @@ import { LoadingButton } from '@mui/lab';
 import swal from 'sweetalert';
 import AppBar from '@mui/material/AppBar';
 
+
+import Autocomplete from '@mui/material/Autocomplete';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+/* import Button from '@mui/material/Button'; */
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Chip, Divider, Box, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
+import BasicTable from './TableBienes'
+import Catalogo_Nacional from './Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
 
 const formikBasicInformationSchema = Yup.object().shape({
   // first part form
@@ -25,7 +29,7 @@ const formikBasicInformationSchema = Yup.object().shape({
   color: Yup.string().min(1, "color es muy corto!").max(400, "color es muy largo!").required("color es requerido!"),
   dimensiones: Yup.string().min(1, "dimensiones es muy corto!").max(400, "dimensiones es muy largo!").required("dimensiones es requerido!"),
   estado: Yup.string().min(1, "estado es muy corto!").max(400, "estado es muy largo!").required("estado es requerido!"),
-  observaciones: Yup.string().min(1, "observaciones es muy corto!").max(400, "observaciones es muy largo!").required("observaciones es requerido!"),
+  observaciones: Yup.string().min(1, "observaciones es muy corto!").max(400, "observaciones es muy largo!"),
   codigo: Yup.string().min(1, "codigo es muy corto!").max(400, "codigo es muy largo!").required("codigo es requerido!"),
 });
 
@@ -45,7 +49,19 @@ const formikLoginSchema = Yup.object().shape({
 }); */
 
 
-
+const ordenDeBienes = [
+  "codigo",
+  "numeroEtiqueta",
+  "marca",
+  "modelo",
+  "serie",
+  "color",
+  "dimensiones",
+  "estado",
+  "observaciones",
+  "dependencia",
+  "responsable"
+];
 
 function App() {
 
@@ -62,11 +78,23 @@ function App() {
   };
 
   const [list, setlist] = React.useState([]);
-console.log('list', list)
+
   React.useEffect(() => {
     (async () => {
       if (localStorage.getItem("inventariador")) {
-        setlist(await listarEnventario());
+
+        const bienes = await listarEnventario();
+
+        const bienesMap = []
+        for (const bien of bienes) {
+          const binesOrdenados = {};
+          for (const key of ordenDeBienes) {
+            binesOrdenados[key] = bien[key];
+          }
+          bienesMap.push(binesOrdenados);
+        }
+
+        setlist(bienesMap);
       }
     })();
   }, []);
@@ -207,6 +235,13 @@ console.log('list', list)
     )
   }
 
+  const test = (data) => {
+    for (const key in data) {
+      formikBasicInformation.setFieldValue(key, data[key] || "");
+    }
+  }
+
+
   return (
     <Box>
       <Box sx={{ flexGrow: 1 }}>
@@ -228,41 +263,42 @@ console.log('list', list)
         </AppBar>
       </Box>
       <Box style={{ padding: '25px' }}>
+        <Divider style={{ marginBottom: "25px" }}>
+          <Chip label="REGISTRO DE BIENES" />
+        </Divider>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
 
           <Grid item xs={12} sm={10} md={8} lg={6}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={12} md={6} lg={6}>
-                <TextField
-                  inputProps={{ maxLength: 100 }}
-                  fullWidth
-                  size="small"
-                  id='dependencia'
-                  label='Dependencia'
-                  variant='outlined'
-                  sx={{ mb: 0.5 }}
-                  value={formikBasicInformation.values.dependencia}
-                  onChange={formikBasicInformation.handleChange}
-                  error={formikBasicInformation.touched.dependencia && Boolean(formikBasicInformation.errors.dependencia)}
-                  helperText={formikBasicInformation.touched.dependencia && formikBasicInformation.errors.dependencia}
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={Catalogo_Nacional}
+                  onChange={(event, newValue) => {
+                    formikBasicInformation.setFieldValue('codigo', newValue?.Codigo || "");
+                  }}
+                  renderInput={(params) => <TextField {...params} label="QUE BIEN DESEA REGISTRAR ?" />}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
                   inputProps={{ maxLength: 100 }}
                   fullWidth
+                  disabled
                   size="small"
-                  id='responsable'
-                  label='Responsable'
+                  id='codigo'
+                  label='Código'
                   variant='outlined'
                   sx={{ mb: 0.5 }}
-                  value={formikBasicInformation.values.responsable}
+                  value={formikBasicInformation.values.codigo}
                   onChange={formikBasicInformation.handleChange}
-                  error={formikBasicInformation.touched.responsable && Boolean(formikBasicInformation.errors.responsable)}
-                  helperText={formikBasicInformation.touched.responsable && formikBasicInformation.errors.responsable}
+                  error={formikBasicInformation.touched.codigo && Boolean(formikBasicInformation.errors.codigo)}
+                  helperText={formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo}
                 />
               </Grid>
+
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
                   inputProps={{ maxLength: 100 }}
@@ -278,6 +314,8 @@ console.log('list', list)
                   helperText={formikBasicInformation.touched.numeroEtiqueta && formikBasicInformation.errors.numeroEtiqueta}
                 />
               </Grid>
+
+
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
                   inputProps={{ maxLength: 100 }}
@@ -323,6 +361,7 @@ console.log('list', list)
                   helperText={formikBasicInformation.touched.serie && formikBasicInformation.errors.serie}
                 />
               </Grid>
+
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
                   inputProps={{ maxLength: 100 }}
@@ -388,16 +427,34 @@ console.log('list', list)
                   inputProps={{ maxLength: 100 }}
                   fullWidth
                   size="small"
-                  id='codigo'
-                  label='Código'
+                  id='dependencia'
+                  label='Dependencia'
                   variant='outlined'
                   sx={{ mb: 0.5 }}
-                  value={formikBasicInformation.values.codigo}
+                  value={formikBasicInformation.values.dependencia}
                   onChange={formikBasicInformation.handleChange}
-                  error={formikBasicInformation.touched.codigo && Boolean(formikBasicInformation.errors.codigo)}
-                  helperText={formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo}
+                  error={formikBasicInformation.touched.dependencia && Boolean(formikBasicInformation.errors.dependencia)}
+                  helperText={formikBasicInformation.touched.dependencia && formikBasicInformation.errors.dependencia}
                 />
               </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  inputProps={{ maxLength: 100 }}
+                  fullWidth
+                  size="small"
+                  id='responsable'
+                  label='Responsable'
+                  variant='outlined'
+                  sx={{ mb: 0.5 }}
+                  value={formikBasicInformation.values.responsable}
+                  onChange={formikBasicInformation.handleChange}
+                  error={formikBasicInformation.touched.responsable && Boolean(formikBasicInformation.errors.responsable)}
+                  helperText={formikBasicInformation.touched.responsable && formikBasicInformation.errors.responsable}
+                />
+              </Grid>
+
+
+
 
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <LoadingButton
@@ -418,6 +475,10 @@ console.log('list', list)
 
           <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
         </Grid>
+        <Divider style={{ marginTop: "25px" }}>
+          <Chip label="LISTA DE TUS BIENES REGISTRADOS" />
+        </Divider>
+        <BasicTable rows={list} callback={test} />
       </Box>
     </Box>
   )
