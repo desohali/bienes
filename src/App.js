@@ -17,17 +17,42 @@ import { Chip, Divider, Box, FormControl, FormControlLabel, Grid, InputLabel, Me
 import BasicTable from './TableBienes'
 import Catalogo_Nacional from './Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
 
+const DNIS = [
+  '74026816', '48115295', '42142607', '77491421', '61611530', '46984573', '73422124',
+  '43917257', '60507843', '71033109', '76723091', '71248260', '61702269', '71272141',
+  '77014764', '75259917', '71391049', '73088000', '12345678', '74060603', '75624129',
+  '72708818', '73456805', '71790187', '71067923', '76400492', '74931655', '71600418',
+  '71820114', '75524592'
+];
+
+
+
+const regex = /[a-zA-Z0-9]/;
+
 const formikBasicInformationSchema = Yup.object().shape({
   // first part form
   //dependencia: Yup.number().min(1, "Number of pieces too short!").max(9999, "Number of pieces too long!").required("Number of pieces is required!"),
   dependencia: Yup.string().min(1, "dependencia es muy corto!").max(400, "dependencia es muy largo!").required("dependenncia es requerido!"),
   responsable: Yup.string().min(1, "responsable es muy corto!").max(400, "responsable es muy largo!").required("responsable es requerido!"),
   numeroEtiqueta: Yup.string().min(1, "numeroEtiqueta es muy corto!").max(400, "numeroEtiqueta es muy largo!").required("numeroEtiqueta es requerido!"),
-  marca: Yup.string().min(1, "marca es muy corto!").max(400, "marca es muy largo!").required("marca es requerido!"),
-  modelo: Yup.string().min(1, "modelo es muy corto!").max(400, "modelo es muy largo!").required("modelo es requerido!"),
-  serie: Yup.string().min(1, "serie es muy corto!").max(400, "serie es muy largo!").required("serie es requerido!"),
-  color: Yup.string().min(1, "color es muy corto!").max(400, "color es muy largo!").required("color es requerido!"),
   dimensiones: Yup.string().min(1, "dimensiones es muy corto!").max(400, "dimensiones es muy largo!").required("dimensiones es requerido!"),
+  marca: Yup.string().when('dimensiones', {
+    is: (dimensiones) => !regex.test((dimensiones || "").toString()),
+    then: Yup.string().min(1, "marca es muy corto!").max(400, "marca es muy largo!").required("marca es requerido!"),
+    otherwise: Yup.string()
+  }),
+  modelo: Yup.string().when('dimensiones', {
+    is: (dimensiones) => !regex.test((dimensiones || "").toString()),
+    then: Yup.string().min(1, "modelo es muy corto!").max(400, "modelo es muy largo!").required("modelo es requerido!"),
+    otherwise: Yup.string()
+  }),
+  serie: Yup.string().when('dimensiones', {
+    is: (dimensiones) => !regex.test((dimensiones || "").toString()),
+    then: Yup.string().min(1, "serie es muy corto!").max(400, "serie es muy largo!").required("serie es requerido!"),
+    otherwise: Yup.string()
+  }),
+  color: Yup.string().min(1, "color es muy corto!").max(400, "color es muy largo!").required("color es requerido!"),
+
   estado: Yup.string().min(1, "estado es muy corto!").max(400, "estado es muy largo!").required("estado es requerido!"),
   observaciones: Yup.string().min(1, "observaciones es muy corto!").max(400, "observaciones es muy largo!"),
   codigo: Yup.string().min(1, "codigo es muy corto!").max(400, "codigo es muy largo!").required("codigo es requerido!"),
@@ -35,8 +60,8 @@ const formikBasicInformationSchema = Yup.object().shape({
 
 const formikLoginSchema = Yup.object().shape({
   // first part form
-  usuario: Yup.string().min(1, "usuario es muy corto!").max(400, "usuario es muy largo!").required("usuario es requerido!"),
-  clave: Yup.string().min(1, "contraseña es muy corto!").max(400, "contraseña es muy largo!").required("contraseña es requerido!"),
+  dni: Yup.string().min(8, "dni es muy corto!").max(8, "dni es muy largo!").required("dni es requerido!"),
+  //clave: Yup.string().min(1, "contraseña es muy corto!").max(400, "contraseña es muy largo!").required("contraseña es requerido!"),
 });
 
 /* app.post("/listarEnventario", async (req, res) => {
@@ -79,23 +104,27 @@ function App() {
 
   const [list, setlist] = React.useState([]);
 
+  const fetchListar = async () => {
+    if (localStorage.getItem("inventariador")) {
+
+      const bienes = await listarEnventario();
+
+      const bienesMap = []
+      for (const bien of bienes) {
+        const binesOrdenados = {};
+        for (const key of ordenDeBienes) {
+          binesOrdenados[key] = bien[key];
+        }
+        bienesMap.push(binesOrdenados);
+      }
+
+      setlist(bienesMap);
+    }
+  }
+
   React.useEffect(() => {
     (async () => {
-      if (localStorage.getItem("inventariador")) {
-
-        const bienes = await listarEnventario();
-
-        const bienesMap = []
-        for (const bien of bienes) {
-          const binesOrdenados = {};
-          for (const key of ordenDeBienes) {
-            binesOrdenados[key] = bien[key];
-          }
-          bienesMap.push(binesOrdenados);
-        }
-
-        setlist(bienesMap);
-      }
+      await fetchListar();
     })();
   }, []);
 
@@ -132,6 +161,7 @@ function App() {
         const json = await response.json();
 
         formikBasicInformation.resetForm();
+        await fetchListar();
         swal("", "SE REGISTRO CORRECTAMENTE !", "success");
       } catch (error) {
         swal("", "ERROR AL REGISTRAR, VUELVA A INTENTARLO GRACIAS !", "error");
@@ -144,12 +174,17 @@ function App() {
     validateOnMount: true,
     initialValues: {
       // first part form
-      usuario: '',
-      clave: '',
+      dni: '',
+      //clave: '',
     },
     validationSchema: formikLoginSchema,
     onSubmit: async (values) => {
-      localStorage.setItem("inventariador", values.usuario);
+      if (DNIS.includes((values.dni.trim()))) {
+        localStorage.setItem("inventariador", values.dni);
+      } else {
+        swal("", "USUARIO NO AUTORIZADO !", "error");
+      }
+
     },
   });
 
@@ -185,17 +220,17 @@ function App() {
                     inputProps={{ maxLength: 100 }}
                     fullWidth
                     size="small"
-                    id='usuario'
-                    label='Usuario'
+                    id='dni'
+                    label='Ingrese su dni'
                     variant='outlined'
                     sx={{ mb: 0.5 }}
-                    value={formikLogin.values.usuario}
+                    value={formikLogin.values.dni}
                     onChange={formikLogin.handleChange}
-                    error={formikLogin.touched.usuario && Boolean(formikLogin.errors.usuario)}
-                    helperText={formikLogin.touched.usuario && formikLogin.errors.usuario}
+                    error={formikLogin.touched.dni && Boolean(formikLogin.errors.dni)}
+                    helperText={formikLogin.touched.dni && formikLogin.errors.dni}
                   />
                 </Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* <Grid item xs={12} sm={12} md={6} lg={6}>
                   <TextField
                     inputProps={{ maxLength: 100 }}
                     fullWidth
@@ -209,7 +244,7 @@ function App() {
                     error={formikLogin.touched.clave && Boolean(formikLogin.errors.clave)}
                     helperText={formikLogin.touched.clave && formikLogin.errors.clave}
                   />
-                </Grid>
+                </Grid> */}
 
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <LoadingButton
@@ -220,7 +255,9 @@ function App() {
                     loadingPosition='start'
                     startIcon={<SaveIcon />}
                     onClick={async () => {
+
                       await formikLogin.submitForm();
+
                     }}>
                     INGRESAR
                   </LoadingButton>
