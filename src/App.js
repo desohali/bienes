@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 /* import Button from '@mui/material/Button'; */
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Chip, Divider, Box, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
+import { Chip, Divider, Box, Badge, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
 import BasicTable from './TableBienes'
 import Catalogo_Nacional from './Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
 
@@ -22,13 +22,13 @@ const DNIS = [
   '43917257', '60507843', '71033109', '76723091', '71248260', '61702269', '71272141',
   '77014764', '75259917', '71391049', '73088000', '12345678', '74060603', '75624129',
   '72708818', '73456805', '71790187', '71067923', '76400492', '74931655', '71600418',
-  '71820114', '75524592', '61025653', '26703070', '74026816', '48115295', '42142607', '73422124', '71033109', '76723091', 
-  '71248260', '61702269', '71272141', '71391049', '73088000', '26706371', 
-  '74060603', '72708818', '73456805', '71790187', '71067923', '76400492', 
-  '71600418', '59384120', '76937817', '40028772', '75524592', '77014664', 
-  '42703180', '71062503', '72546177', '73662634', '75514017', '26703070', 
-  '72408548', '74224991', '74917084', '72255382', '61025653', '74969966', 
-  '43558264', '46966682', '73422125', '45715771', '75022980', '70495793'
+  '71820114', '75524592', '61025653', '26703070', '74026816', '48115295', '42142607', '73422124', '71033109', '76723091',
+  '71248260', '61702269', '71272141', '71391049', '73088000', '26706371',
+  '74060603', '72708818', '73456805', '71790187', '71067923', '76400492',
+  '71600418', '59384120', '76937817', '40028772', '75524592', '77014664',
+  '42703180', '71062503', '72546177', '73662634', '75514017', '26703070',
+  '72408548', '74224991', '74917084', '72255382', '61025653', '74969966',
+  '43558264', '46966682', '73422125', '45715771', '75022980', '70495793', '12345679', '97654321'
 ];
 
 
@@ -116,7 +116,7 @@ function App() {
       const bienes = await listarEnventario();
 
       const bienesMap = []
-      for (const bien of bienes) {
+      for (const bien of (bienes?.data || [])) {
         const binesOrdenados = {};
         for (const key of ordenDeBienes) {
           binesOrdenados[key] = bien[key];
@@ -124,7 +124,7 @@ function App() {
         bienesMap.push(binesOrdenados);
       }
 
-      setlist(bienesMap);
+      setlist({ ...bienes, data: bienesMap });
     }
   }
 
@@ -254,6 +254,7 @@ function App() {
 
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <LoadingButton
+                    tyle={{ width: "100%" }}
                     //disabled={!formikBasicInformation.isValid || formikBasicInformation.isSubmitting}
                     color='primary'
                     variant='contained'
@@ -501,6 +502,7 @@ function App() {
 
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <LoadingButton
+                  style={{ width: "100%" }}
                   //disabled={!formikBasicInformation.isValid || formikBasicInformation.isSubmitting}
                   color='primary'
                   variant='contained'
@@ -519,9 +521,9 @@ function App() {
           <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
         </Grid>
         <Divider style={{ marginTop: "25px" }}>
-          <Chip label="LISTA DE TUS BIENES REGISTRADOS" />
+          <Chip label={"TOTAL DE TUS BIENES REGISTRADOS " + (list?.count || 0)} />
         </Divider>
-        <BasicTable rows={list} callback={test} />
+        <BasicTable rows={(list?.data || [])} callback={test} />
       </Box>
     </Box>
   )

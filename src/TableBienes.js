@@ -24,10 +24,12 @@ export default function BasicTable({ rows = [], callback = (d) => { } }) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            {Object.keys((rows[0] || [])).map((titulo) => <TableCell align="right">{titulo}</TableCell>)}
+            {Object.keys((rows[0] || [])).map((titulo) => {
+              return <TableCell align="center">{titulo == "numeroEtiqueta" ? "# etiqueta" : titulo}</TableCell>
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,8 +38,16 @@ export default function BasicTable({ rows = [], callback = (d) => { } }) {
               key={row.codigo}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              {Object.entries(row).map(([key, value]) => <TableCell align="right">{value}</TableCell>)}
-              <TableCell align="right"><Button variant="contained" onClick={() => {
+              {Object.entries(row).map(([key, value]) => {
+                let minWidth = "inherit";
+                if (key == "dependencia") {
+                  minWidth = "200px";
+                } else if (key == "responsable") {
+                  minWidth = "120px";
+                }
+                return <TableCell style={{ minWidth: minWidth }} key={key} align="center">{value}</TableCell>
+              })}
+              <TableCell align="right"><Button variant="contained" size="small" onClick={() => {
                 callback(row);
               }}>CLONAR</Button></TableCell>
             </TableRow>
