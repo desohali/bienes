@@ -1,0 +1,826 @@
+[
+  {
+    "dni": "74026816",
+    "json": {
+      "success": true,
+      "dni": "74026816",
+      "nombres": "JOISY MILAGRO",
+      "apellidoPaterno": "CHAVARRY",
+      "apellidoMaterno": "DIAZ",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "48115295",
+    "json": {
+      "success": true,
+      "dni": "48115295",
+      "nombres": "CORINA ANGELITA",
+      "apellidoPaterno": "BARBOZA",
+      "apellidoMaterno": "DIAZ",
+      "codVerifica": "9"
+    }
+  },
+  {
+    "dni": "42142607",
+    "json": {
+      "success": true,
+      "dni": "42142607",
+      "nombres": "JOSE CANDELARIO",
+      "apellidoPaterno": "VASQUEZ",
+      "apellidoMaterno": "MEGO",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "77491421",
+    "json": {
+      "success": true,
+      "dni": "77491421",
+      "nombres": "KARLA YANINA",
+      "apellidoPaterno": "BUSTAMANTE",
+      "apellidoMaterno": "BECERRA",
+      "codVerifica": "4"
+    }
+  },
+  {
+    "dni": "61611530",
+    "json": {
+      "success": true,
+      "dni": "61611530",
+      "nombres": "CLEVER",
+      "apellidoPaterno": "HOYOS",
+      "apellidoMaterno": "VASQUEZ",
+      "codVerifica": "8"
+    }
+  },
+  {
+    "dni": "46984573",
+    "json": {
+      "success": true,
+      "dni": "46984573",
+      "nombres": "OSMAN JOAQUIN",
+      "apellidoPaterno": "YNGA",
+      "apellidoMaterno": "AREVALO",
+      "codVerifica": "8"
+    }
+  },
+  {
+    "dni": "73422124",
+    "json": {
+      "success": true,
+      "dni": "73422124",
+      "nombres": "NOELIA DEL PILAR",
+      "apellidoPaterno": "MARTINEZ",
+      "apellidoMaterno": "GONZALES",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "43917257",
+    "json": {
+      "success": true,
+      "dni": "43917257",
+      "nombres": "MARINO",
+      "apellidoPaterno": "VASQUEZ",
+      "apellidoMaterno": "MEGO",
+      "codVerifica": "1"
+    }
+  },
+  {
+    "dni": "60507843",
+    "json": {
+      "success": true,
+      "dni": "60507843",
+      "nombres": "EMERSON IVAN",
+      "apellidoPaterno": "VALLEJOS",
+      "apellidoMaterno": "BUSTAMANTE",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "71033109",
+    "json": {
+      "success": true,
+      "dni": "71033109",
+      "nombres": "SHIRLEY ARACELY",
+      "apellidoPaterno": "MENDOZA",
+      "apellidoMaterno": "CHUGNAS",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "76723091",
+    "json": {
+      "success": true,
+      "dni": "76723091",
+      "nombres": "HEFFERSON JOSÉ",
+      "apellidoPaterno": "VELÁSQUEZ",
+      "apellidoMaterno": "HUAMÁN",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "71248260",
+    "json": {
+      "success": true,
+      "dni": "71248260",
+      "nombres": "MICAELA NOEMI",
+      "apellidoPaterno": "CARRASCO",
+      "apellidoMaterno": "GUERRERO",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "61702269",
+    "json": {
+      "success": true,
+      "dni": "61702269",
+      "nombres": "MARIA MERCEDES",
+      "apellidoPaterno": "GARAY",
+      "apellidoMaterno": "CIPRIANO",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "71272141",
+    "json": {
+      "success": true,
+      "dni": "71272141",
+      "nombres": "CÉSAR JAVIER",
+      "apellidoPaterno": "MEDINA",
+      "apellidoMaterno": "MARÍN",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "77014764",
+    "json": {
+      "success": true,
+      "dni": "77014764",
+      "nombres": "KARLA DAMARIS ISABELLA",
+      "apellidoPaterno": "ALCALDE",
+      "apellidoMaterno": "CALLA",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "75259917",
+    "json": {
+      "success": true,
+      "dni": "75259917",
+      "nombres": "SARA",
+      "apellidoPaterno": "MENDOZA",
+      "apellidoMaterno": "TRIGOZO",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "71391049",
+    "json": {
+      "success": true,
+      "dni": "71391049",
+      "nombres": "YESSICA MABEL",
+      "apellidoPaterno": "LEIVA",
+      "apellidoMaterno": "COLUNCHE",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "73088000",
+    "json": {
+      "success": true,
+      "dni": "73088000",
+      "nombres": "HOMERO LENNIM",
+      "apellidoPaterno": "GALLARDO",
+      "apellidoMaterno": "ZELADA",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "12345678",
+    "json": {
+      "success": false,
+      "message": "No se encontraron resultados."
+    }
+  },
+  {
+    "dni": "74060603",
+    "json": {
+      "success": true,
+      "dni": "74060603",
+      "nombres": "ITALO OMAR",
+      "apellidoPaterno": "DAVILA",
+      "apellidoMaterno": "BAZAN",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "75624129",
+    "json": {
+      "success": true,
+      "dni": "75624129",
+      "nombres": "PAOLA JULISSA",
+      "apellidoPaterno": "LOZANO",
+      "apellidoMaterno": "CHAVEZ",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "72708818",
+    "json": {
+      "success": true,
+      "dni": "72708818",
+      "nombres": "KATHERIN DANIELA",
+      "apellidoPaterno": "RIVERA",
+      "apellidoMaterno": "RIQUELME",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "73456805",
+    "json": {
+      "success": true,
+      "dni": "73456805",
+      "nombres": "KIMBERLY JANELY",
+      "apellidoPaterno": "SANTA CRUZ",
+      "apellidoMaterno": "TERRONES",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "71790187",
+    "json": {
+      "success": true,
+      "dni": "71790187",
+      "nombres": "GABRIELA DEL ROCIO",
+      "apellidoPaterno": "CARRILLO",
+      "apellidoMaterno": "BOÑON",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "71067923",
+    "json": {
+      "success": true,
+      "dni": "71067923",
+      "nombres": "CLAUDIA CRISTINA",
+      "apellidoPaterno": "ALCANTARA",
+      "apellidoMaterno": "HUAMAN",
+      "codVerifica": "8"
+    }
+  },
+  {
+    "dni": "76400492",
+    "json": {
+      "success": true,
+      "dni": "76400492",
+      "nombres": "SHIRLEY SOLEDAD",
+      "apellidoPaterno": "GUERRA",
+      "apellidoMaterno": "CACHI",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "74931655",
+    "json": {
+      "success": true,
+      "dni": "74931655",
+      "nombres": "ANAPAULA",
+      "apellidoPaterno": "MANOSALVA",
+      "apellidoMaterno": "RUIZ",
+      "codVerifica": "6"
+    }
+  },
+  {
+    "dni": "71600418",
+    "json": {
+      "success": true,
+      "dni": "71600418",
+      "nombres": "JHUDIT EMELIN",
+      "apellidoPaterno": "CARUAJULCA",
+      "apellidoMaterno": "BRIONES",
+      "codVerifica": "0"
+    }
+  },
+  {
+    "dni": "71820114",
+    "json": {
+      "success": true,
+      "dni": "71820114",
+      "nombres": "DIEGO ARMANDO",
+      "apellidoPaterno": "CABANILLAS",
+      "apellidoMaterno": "CORREA",
+      "codVerifica": "4"
+    }
+  },
+  {
+    "dni": "75524592",
+    "json": {
+      "success": true,
+      "dni": "75524592",
+      "nombres": "GABY JOHANA",
+      "apellidoPaterno": "RODRÍGUEZ",
+      "apellidoMaterno": "MALAVER",
+      "codVerifica": "1"
+    }
+  },
+  {
+    "dni": "61025653",
+    "json": {
+      "success": true,
+      "dni": "61025653",
+      "nombres": "LINKED",
+      "apellidoPaterno": "CARRERA",
+      "apellidoMaterno": "REYES",
+      "codVerifica": "8"
+    }
+  },
+  {
+    "dni": "26703070",
+    "json": {
+      "success": true,
+      "dni": "26703070",
+      "nombres": "JEZABEL",
+      "apellidoPaterno": "REYES",
+      "apellidoMaterno": "VILLEGAS",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "74026816",
+    "json": {
+      "success": true,
+      "dni": "74026816",
+      "nombres": "JOISY MILAGRO",
+      "apellidoPaterno": "CHAVARRY",
+      "apellidoMaterno": "DIAZ",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "48115295",
+    "json": {
+      "success": true,
+      "dni": "48115295",
+      "nombres": "CORINA ANGELITA",
+      "apellidoPaterno": "BARBOZA",
+      "apellidoMaterno": "DIAZ",
+      "codVerifica": "9"
+    }
+  },
+  {
+    "dni": "42142607",
+    "json": {
+      "success": true,
+      "dni": "42142607",
+      "nombres": "JOSE CANDELARIO",
+      "apellidoPaterno": "VASQUEZ",
+      "apellidoMaterno": "MEGO",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "73422124",
+    "json": {
+      "success": true,
+      "dni": "73422124",
+      "nombres": "NOELIA DEL PILAR",
+      "apellidoPaterno": "MARTINEZ",
+      "apellidoMaterno": "GONZALES",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "71033109",
+    "json": {
+      "success": true,
+      "dni": "71033109",
+      "nombres": "SHIRLEY ARACELY",
+      "apellidoPaterno": "MENDOZA",
+      "apellidoMaterno": "CHUGNAS",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "76723091",
+    "json": {
+      "success": true,
+      "dni": "76723091",
+      "nombres": "HEFFERSON JOSÉ",
+      "apellidoPaterno": "VELÁSQUEZ",
+      "apellidoMaterno": "HUAMÁN",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "71248260",
+    "json": {
+      "success": true,
+      "dni": "71248260",
+      "nombres": "MICAELA NOEMI",
+      "apellidoPaterno": "CARRASCO",
+      "apellidoMaterno": "GUERRERO",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "61702269",
+    "json": {
+      "success": true,
+      "dni": "61702269",
+      "nombres": "MARIA MERCEDES",
+      "apellidoPaterno": "GARAY",
+      "apellidoMaterno": "CIPRIANO",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "71272141",
+    "json": {
+      "success": true,
+      "dni": "71272141",
+      "nombres": "CÉSAR JAVIER",
+      "apellidoPaterno": "MEDINA",
+      "apellidoMaterno": "MARÍN",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "71391049",
+    "json": {
+      "success": true,
+      "dni": "71391049",
+      "nombres": "YESSICA MABEL",
+      "apellidoPaterno": "LEIVA",
+      "apellidoMaterno": "COLUNCHE",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "73088000",
+    "json": {
+      "success": true,
+      "dni": "73088000",
+      "nombres": "HOMERO LENNIM",
+      "apellidoPaterno": "GALLARDO",
+      "apellidoMaterno": "ZELADA",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "26706371",
+    "json": {
+      "success": true,
+      "dni": "26706371",
+      "nombres": "RONAL",
+      "apellidoPaterno": "SALAZAR",
+      "apellidoMaterno": "GONZALES",
+      "codVerifica": "8"
+    }
+  },
+  {
+    "dni": "74060603",
+    "json": {
+      "success": true,
+      "dni": "74060603",
+      "nombres": "ITALO OMAR",
+      "apellidoPaterno": "DAVILA",
+      "apellidoMaterno": "BAZAN",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "72708818",
+    "json": {
+      "success": true,
+      "dni": "72708818",
+      "nombres": "KATHERIN DANIELA",
+      "apellidoPaterno": "RIVERA",
+      "apellidoMaterno": "RIQUELME",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "73456805",
+    "json": {
+      "success": true,
+      "dni": "73456805",
+      "nombres": "KIMBERLY JANELY",
+      "apellidoPaterno": "SANTA CRUZ",
+      "apellidoMaterno": "TERRONES",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "71790187",
+    "json": {
+      "success": true,
+      "dni": "71790187",
+      "nombres": "GABRIELA DEL ROCIO",
+      "apellidoPaterno": "CARRILLO",
+      "apellidoMaterno": "BOÑON",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "71067923",
+    "json": {
+      "success": true,
+      "dni": "71067923",
+      "nombres": "CLAUDIA CRISTINA",
+      "apellidoPaterno": "ALCANTARA",
+      "apellidoMaterno": "HUAMAN",
+      "codVerifica": "8"
+    }
+  },
+  {
+    "dni": "76400492",
+    "json": {
+      "success": true,
+      "dni": "76400492",
+      "nombres": "SHIRLEY SOLEDAD",
+      "apellidoPaterno": "GUERRA",
+      "apellidoMaterno": "CACHI",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "71600418",
+    "json": {
+      "success": true,
+      "dni": "71600418",
+      "nombres": "JHUDIT EMELIN",
+      "apellidoPaterno": "CARUAJULCA",
+      "apellidoMaterno": "BRIONES",
+      "codVerifica": "0"
+    }
+  },
+  {
+    "dni": "59384120",
+    "json": {
+      "success": false,
+      "message": "No se encontraron resultados."
+    }
+  },
+  {
+    "dni": "76937817",
+    "json": {
+      "success": true,
+      "dni": "76937817",
+      "nombres": "ANGEL JULIO",
+      "apellidoPaterno": "GARCIA",
+      "apellidoMaterno": "LECCA",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "40028772",
+    "json": {
+      "success": true,
+      "dni": "40028772",
+      "nombres": "ESSGILIA RAYBEL",
+      "apellidoPaterno": "TERRONES",
+      "apellidoMaterno": "ROMAN DE ARANA",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "75524592",
+    "json": {
+      "success": true,
+      "dni": "75524592",
+      "nombres": "GABY JOHANA",
+      "apellidoPaterno": "RODRÍGUEZ",
+      "apellidoMaterno": "MALAVER",
+      "codVerifica": "1"
+    }
+  },
+  {
+    "dni": "77014664",
+    "json": {
+      "success": true,
+      "dni": "77014664",
+      "nombres": "NEILA ROXANA",
+      "apellidoPaterno": "COTRINA",
+      "apellidoMaterno": "VARGAS",
+      "codVerifica": "9"
+    }
+  },
+  {
+    "dni": "42703180",
+    "json": {
+      "success": true,
+      "dni": "42703180",
+      "nombres": "JACKELINE",
+      "apellidoPaterno": "HUAMAN",
+      "apellidoMaterno": "MORALES",
+      "codVerifica": "2"
+    }
+  },
+  {
+    "dni": "71062503",
+    "json": {
+      "success": true,
+      "dni": "71062503",
+      "nombres": "CARLOS ALBERTO",
+      "apellidoPaterno": "RABANAL",
+      "apellidoMaterno": "BUSTAMANTE",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "72546177",
+    "json": {
+      "success": true,
+      "dni": "72546177",
+      "nombres": "DANIELA DAISSE",
+      "apellidoPaterno": "QUIROZ",
+      "apellidoMaterno": "CABRERA",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "73662634",
+    "json": {
+      "success": true,
+      "dni": "73662634",
+      "nombres": "ROSMERI LILET",
+      "apellidoPaterno": "MICHA",
+      "apellidoMaterno": "SÁNCHEZ",
+      "codVerifica": "4"
+    }
+  },
+  {
+    "dni": "75514017",
+    "json": {
+      "success": true,
+      "dni": "75514017",
+      "nombres": "MARIA EDITHA",
+      "apellidoPaterno": "SALCEDO",
+      "apellidoMaterno": "BAUTISTA",
+      "codVerifica": "1"
+    }
+  },
+  {
+    "dni": "26703070",
+    "json": {
+      "success": true,
+      "dni": "26703070",
+      "nombres": "JEZABEL",
+      "apellidoPaterno": "REYES",
+      "apellidoMaterno": "VILLEGAS",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "72408548",
+    "json": {
+      "success": true,
+      "dni": "72408548",
+      "nombres": "FLOR ERLITA",
+      "apellidoPaterno": "HUAYAC",
+      "apellidoMaterno": "EUGENIO",
+      "codVerifica": "9"
+    }
+  },
+  {
+    "dni": "74224991",
+    "json": {
+      "success": true,
+      "dni": "74224991",
+      "nombres": "JUAN CARLOS",
+      "apellidoPaterno": "ORTIZ",
+      "apellidoMaterno": "MENDOZA",
+      "codVerifica": "0"
+    }
+  },
+  {
+    "dni": "74917084",
+    "json": {
+      "success": true,
+      "dni": "74917084",
+      "nombres": "EDUARDO ADRIAN",
+      "apellidoPaterno": "BARDALES",
+      "apellidoMaterno": "VILLANUEVA",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "72255382",
+    "json": {
+      "success": true,
+      "dni": "72255382",
+      "nombres": "CARLOS MANUEL",
+      "apellidoPaterno": "MARIN",
+      "apellidoMaterno": "RAVINES",
+      "codVerifica": "6"
+    }
+  },
+  {
+    "dni": "61025653",
+    "json": {
+      "success": true,
+      "dni": "61025653",
+      "nombres": "LINKED",
+      "apellidoPaterno": "CARRERA",
+      "apellidoMaterno": "REYES",
+      "codVerifica": "8"
+    }
+  },
+  {
+    "dni": "74969966",
+    "json": {
+      "success": true,
+      "dni": "74969966",
+      "nombres": "ARNOLD CHRISTOPER LEE",
+      "apellidoPaterno": "MICHA",
+      "apellidoMaterno": "SANCHEZ",
+      "codVerifica": "1"
+    }
+  },
+  {
+    "dni": "43558264",
+    "json": {
+      "success": true,
+      "dni": "43558264",
+      "nombres": "BENITA LUZ",
+      "apellidoPaterno": "HUAMAN",
+      "apellidoMaterno": "OCAS",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "46966682",
+    "json": {
+      "success": true,
+      "dni": "46966682",
+      "nombres": "ANA JOVITA",
+      "apellidoPaterno": "ALVARADO",
+      "apellidoMaterno": "SÁNCHEZ",
+      "codVerifica": "5"
+    }
+  },
+  {
+    "dni": "73422125",
+    "json": {
+      "success": true,
+      "dni": "73422125",
+      "nombres": "PATTY LISBETH",
+      "apellidoPaterno": "MARTINEZ",
+      "apellidoMaterno": "GONZALES",
+      "codVerifica": "3"
+    }
+  },
+  {
+    "dni": "45715771",
+    "json": {
+      "success": true,
+      "dni": "45715771",
+      "nombres": "ROCIO NOEMI",
+      "apellidoPaterno": "MARIN",
+      "apellidoMaterno": "AYALA",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "75022980",
+    "json": {
+      "success": true,
+      "dni": "75022980",
+      "nombres": "CHASKA ESTHER",
+      "apellidoPaterno": "CALUA",
+      "apellidoMaterno": "BRINGAS",
+      "codVerifica": "7"
+    }
+  },
+  {
+    "dni": "70495793",
+    "json": {
+      "success": true,
+      "dni": "70495793",
+      "nombres": "JUNIOR WILMER",
+      "apellidoPaterno": "ODIAGA",
+      "apellidoMaterno": "FUENTES",
+      "codVerifica": "1"
+    }
+  },
+  {
+    "dni": "12345679",
+    "json": {
+      "success": true,
+      "dni": "12345679",
+      "nombres": "JULIO",
+      "apellidoPaterno": "MANUEL",
+      "apellidoMaterno": "DUENAS",
+      "codVerifica": "0"
+    }
+  },
+  {
+    "dni": "97654321",
+    "json": {
+      "success": false,
+      "message": "No se encontraron resultados."
+    }
+  }
+]

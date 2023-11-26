@@ -6,39 +6,27 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+import { Button, ButtonGroup } from '@mui/material';
 
-/* function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-]; */
-
-export default function BasicTable({ rows = [], callback = (d) => { } }) {
-
+export default function TableBienes({ rows = [], callback = (d) => { } }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            {Object.keys((rows[0] || [])).map((titulo) => {
-              return <TableCell align="center">{titulo == "numeroEtiqueta" ? "# etiqueta" : titulo}</TableCell>
+            {Object.keys((rows[0] || [])).slice(1).map((titulo) => {
+              return <TableCell key={titulo} align="center">{titulo == "numeroEtiqueta" ? "# etiqueta" : titulo}</TableCell>
             })}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, i) => (
             <TableRow
-              key={row.codigo}
+              key={i}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              {Object.entries(row).map(([key, value]) => {
+              {Object.entries(row).slice(1).map(([key, value]) => {
                 let minWidth = "inherit";
                 if (key == "dependencia") {
                   minWidth = "200px";
@@ -47,9 +35,18 @@ export default function BasicTable({ rows = [], callback = (d) => { } }) {
                 }
                 return <TableCell style={{ minWidth: minWidth }} key={key} align="center">{value}</TableCell>
               })}
-              <TableCell align="right"><Button variant="contained" size="small" onClick={() => {
-                callback(row);
-              }}>CLONAR</Button></TableCell>
+              <TableCell align="right">
+                <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+                  <Button variant="outlined" size="small" onClick={() => {
+                    callback({ ...row, _id: '' });
+                  }}>Clonar</Button>
+                  <Button variant="outlined" size="small" onClick={() => {
+                    callback(row);
+                  }}>Editar</Button>
+                </ButtonGroup>
+
+              </TableCell>
+
             </TableRow>
           ))}
         </TableBody>
