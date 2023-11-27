@@ -4,7 +4,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, Chip } from '@mui/material';
 import Catalogo_Nacional from '../Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
 
 export default function MediaCard({ row, callback }) {
@@ -22,7 +22,13 @@ export default function MediaCard({ row, callback }) {
           {bien ? bien.label : ""}
         </Typography>
         {Object.entries(row).slice(1).map(([key, value]) => {
-          return <Typography variant="body2" color="text.secondary">{`${key} : ${value} `}</Typography>
+          return (
+            <Typography variant="body2" color="text.secondary">
+              {`${key} : `}{key == "codigoCorrelativo" ?
+                <Chip label={value} color="success" variant="outlined" style={{ fontSize: "unset", height: "24px" }} /> :
+                value}
+            </Typography>
+          )
         })}
 
       </CardContent>

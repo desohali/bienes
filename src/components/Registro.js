@@ -16,7 +16,7 @@ import TableBienes from './TableBienes'
 import CardBienes from './CardBienes'
 import Catalogo_Nacional from '../Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
 import Reniec from '../Reniec.json'; // Ruta relativa al archivo JSON
-
+import Correlativos_Excel from '../Correlativos_Excel.json'; // Ruta relativa al archivo JSON
 import { useNavigate } from "react-router-dom";
 
 /* let Catalogo_Nacional_Map = Catalogo_Nacional.map(({ Codigo }) => Codigo);
@@ -57,6 +57,7 @@ const formikBasicInformationSchema = Yup.object().shape({
 const ordenDeBienes = [
   "_id",
   "codigo",
+  "codigoCorrelativo",
   "numeroEtiqueta",
   "marca",
   "modelo",
@@ -141,7 +142,15 @@ function Registro() {
   const fetchListar = async () => {
     if (localStorage.getItem("inventariador")) {
 
-      const bienes = await listarEnventario();
+      let bienes = await listarEnventario();
+      bienes.data = (bienes.data || []).map((data) => {
+        let codigoCorrelativo = Correlativos_Excel.find(({ codigo }) => codigo == data.codigo);
+        codigoCorrelativo = codigoCorrelativo ?
+          `${data.codigo}${(data.correlativoFecha + codigoCorrelativo.max.correlativo).toString().padStart(4, '0')}` :
+          `${data.codigo}${data.correlativoFecha.toString().padStart(4, '0')}`
+          ;
+        return { ...data, codigoCorrelativo }
+      });
 
       const bienesMap = []
       for (const bien of (bienes?.data || [])) {
