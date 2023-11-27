@@ -202,8 +202,15 @@ function Registro() {
         await response.json();
 
         formikBasicInformation.resetForm();
+        // limpiamos la imagen
+        inputFileRef.current.value = '';
+        const canvas = document.getElementById("canvasPerfil");
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.height = 0;
+        // limpiamos la imagen fin
         await fetchListar();
-        swal("", "Se registro correctamente!", "success");
+        swal("", `Se ${values._id ? 'actualizó' : 'registró'} correctamente!`, "success");
       } catch (error) {
         swal("", "Error al registrar, vuela a intentar, gracias!", "error");
       }
