@@ -103,7 +103,7 @@ export default function SplitButton() {
         <Grid item xs={12} sm={2} md={2} lg={4}>
           {/* <Button fullWidth variant="contained" onClick={reporteBienes.bind(null, true)}>Descargar excel</Button> */}
           <LoadingButton
-            style={{ width: "100%" }}
+            style={{ width: "100%", display: "none" }}
             color='primary'
             variant='contained'
             loading={loading}
