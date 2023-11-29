@@ -822,5 +822,49 @@
       "success": false,
       "message": "No se encontraron resultados."
     }
+  },
+  {
+    "dni": "75022847",
+    "json": {
+      "success": true,
+      "dni": "75022847",
+      "nombres": "JUAN ABRAHAM",
+      "apellidoPaterno": "ZELADA",
+      "apellidoMaterno": "HUAMAN",
+      "codVerifica": 9
   }
+},
+{
+  "dni": "71062506",
+  "json": {
+    "success": true,
+    "dni": "71062506",
+    "nombres": "JASMIRA",
+    "apellidoPaterno": "YUPANQUI",
+    "apellidoMaterno": "CASTAÑEDA",
+    "codVerifica": "9"
+  }
+},
+{
+  "dni": "75359845",
+  "json": {
+    "success": true,
+    "dni": "75359845",
+    "nombres": "YENY LISETH",
+    "apellidoPaterno": "FLORES",
+    "apellidoMaterno": "MANTILLA",
+    "codVerifica": 9
+  }
+},
+{
+  "dni": "70191785",
+  "json": {
+    "success": true,
+    "dni": "70191785",
+    "nombres": "RONMEL ALEXANDER",
+    "apellidoPaterno": "CABANILLAS",
+    "apellidoMaterno": "HUACHUA",
+    "codVerifica": 1
+  }
+}
 ]
