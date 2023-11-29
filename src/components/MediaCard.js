@@ -12,11 +12,6 @@ export default function MediaCard({ row, callback }) {
   const bien = Catalogo_Nacional.find(({ Codigo }) => Codigo == row.codigo);
   return (
     <Card sx={{ width: "100%" }}>
-      {/* <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      /> */}
       <CardContent>
         <Typography gutterBottom variant="p" component="div">
           {bien ? bien.label : ""}
