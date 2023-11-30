@@ -866,5 +866,27 @@
     "apellidoMaterno": "HUACHUA",
     "codVerifica": 1
   }
+},
+  {
+  "dni": "73196892",
+  "json": {
+    "success": true,
+    "dni": "73196892",
+    "nombres": "KEVIN ADRIAN",
+    "apellidoPaterno": "CABANILLAS",
+    "apellidoMaterno": "BECERRA",
+    "codVerifica": 9
+}
+},
+  {
+  "dni": "43014008",
+  "json": {
+    "success": true,
+    "dni": "43014008",
+    "nombres": "DORIS MARINA",
+    "apellidoPaterno": "MUÑOZ",
+    "apellidoMaterno": "ARIAS",
+    "codVerifica": 0
+}
 }
 ]
