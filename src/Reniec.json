@@ -832,72 +832,72 @@
       "apellidoPaterno": "ZELADA",
       "apellidoMaterno": "HUAMAN",
       "codVerifica": 9
-  }
-},
-{
-  "dni": "71062506",
-  "json": {
-    "success": true,
-    "dni": "71062506",
-    "nombres": "JASMIRA",
-    "apellidoPaterno": "YUPANQUI",
-    "apellidoMaterno": "CASTAÑEDA",
-    "codVerifica": "9"
-  }
-},
-{
-  "dni": "75359845",
-  "json": {
-    "success": true,
-    "dni": "75359845",
-    "nombres": "YENY LISETH",
-    "apellidoPaterno": "FLORES",
-    "apellidoMaterno": "MANTILLA",
-    "codVerifica": 9
-  }
-},
-{
-  "dni": "70191785",
-  "json": {
-    "success": true,
-    "dni": "70191785",
-    "nombres": "RONMEL ALEXANDER",
-    "apellidoPaterno": "CABANILLAS",
-    "apellidoMaterno": "HUACHUA",
-    "codVerifica": 1
-  }
-},
-  {
-  "dni": "73196892",
-  "json": {
-    "success": true,
-    "dni": "73196892",
-    "nombres": "KEVIN ADRIAN",
-    "apellidoPaterno": "CABANILLAS",
-    "apellidoMaterno": "BECERRA",
-    "codVerifica": 9
-}
-},
-  {
-  "dni": "43014008",
-  "json": {
-    "success": true,
-    "dni": "43014008",
-    "nombres": "DORIS MARINA",
-    "apellidoPaterno": "MUÑOZ",
-    "apellidoMaterno": "ARIAS",
-    "codVerifica": 0
-}
+    }
   },
   {
-  "dni": "18090716",
-  "json": {
-    "success": true,
+    "dni": "71062506",
+    "json": {
+      "success": true,
+      "dni": "71062506",
+      "nombres": "JASMIRA",
+      "apellidoPaterno": "YUPANQUI",
+      "apellidoMaterno": "CASTAÑEDA",
+      "codVerifica": "9"
+    }
+  },
+  {
+    "dni": "75359845",
+    "json": {
+      "success": true,
+      "dni": "75359845",
+      "nombres": "YENY LISETH",
+      "apellidoPaterno": "FLORES",
+      "apellidoMaterno": "MANTILLA",
+      "codVerifica": 9
+    }
+  },
+  {
+    "dni": "70191785",
+    "json": {
+      "success": true,
+      "dni": "70191785",
+      "nombres": "RONMEL ALEXANDER",
+      "apellidoPaterno": "CABANILLAS",
+      "apellidoMaterno": "HUACHUA",
+      "codVerifica": 1
+    }
+  },
+  {
+    "dni": "73196892",
+    "json": {
+      "success": true,
+      "dni": "73196892",
+      "nombres": "KEVIN ADRIAN",
+      "apellidoPaterno": "CABANILLAS",
+      "apellidoMaterno": "BECERRA",
+      "codVerifica": 9
+    }
+  },
+  {
+    "dni": "43014008",
+    "json": {
+      "success": true,
+      "dni": "43014008",
+      "nombres": "DORIS MARINA",
+      "apellidoPaterno": "MUÑOZ",
+      "apellidoMaterno": "ARIAS",
+      "codVerifica": 0
+    }
+  },
+  {
     "dni": "18090716",
-    "nombres": "HOMERO WILMER",
-    "apellidoPaterno": "ODIAGA",
-    "apellidoMaterno": "VASQUEZ",
-    "codVerifica": "4"
-}
-},
+    "json": {
+      "success": true,
+      "dni": "18090716",
+      "nombres": "HOMERO WILMER",
+      "apellidoPaterno": "ODIAGA",
+      "apellidoMaterno": "VASQUEZ",
+      "codVerifica": "4"
+    }
+  }
 ]
