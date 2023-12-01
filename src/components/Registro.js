@@ -190,7 +190,8 @@ function Registro() {
     },
     validationSchema: formikBasicInformationSchema,
     onSubmit: async (values) => {
-
+      swal("", "El sistema esta fuera de servicio, gracias!", "warning");
+      return;
       try {
         const [firstImage] = inputFileRef.current.files;
         const formData = new FormData();
