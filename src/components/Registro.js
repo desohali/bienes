@@ -209,9 +209,7 @@ function Registro() {
           method: "post",
           body: formData
         });
-        if (!response.ok) {
-    throw new Error('Error en la solicitud');
-  }
+
         await response.json();
 
         formikBasicInformation.resetForm();
