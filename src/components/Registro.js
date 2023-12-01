@@ -222,7 +222,7 @@ function Registro() {
         await fetchListar();
         swal("", `Se ${values._id ? 'actualizó' : 'registró'} correctamente!`, "success");
       } catch (error) {
-        swal("", "Error al registrar, vuela a intentar, gracias!", "error");
+        swal("", "El sistema esta fuera de servicio, gracias!", "warning");
       }
     },
   });
