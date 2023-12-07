@@ -921,5 +921,16 @@
         "apellidoMaterno": "RAMIREZ",
         "codVerifica": 8
     }
+  },
+  {
+    "dni": "43014008",
+    "json": {
+      "success": true,
+      "dni": "43014008",
+      "nombres": "DORIS MARINA",
+      "apellidoPaterno": "MUÑOZ",
+      "apellidoMaterno": "ARIAS",
+      "codVerifica": "0"
+  }
   }
 ]
