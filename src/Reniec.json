@@ -910,5 +910,16 @@
         "apellidoMaterno": "CONTRERAS",
         "codVerifica": 3
     }
+  },
+  {
+    "dni": "47289731",
+    "json": {
+        "success": true,
+        "dni": "47289731",
+        "nombres": "ELVER ANTONIO",
+        "apellidoPaterno": "PINTADO",
+        "apellidoMaterno": "RAMIREZ",
+        "codVerifica": 8
+    }
   }
 ]
