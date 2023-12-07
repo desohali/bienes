@@ -899,5 +899,16 @@
       "apellidoMaterno": "VASQUEZ",
       "codVerifica": "4"
     }
+  },
+  {
+    "dni": "76805412",
+    "json": {
+        "success": true,
+        "dni": "76805412",
+        "nombres": "MARIA MORELLIA",
+        "apellidoPaterno": "MARINO",
+        "apellidoMaterno": "CONTRERAS",
+        "codVerifica": 3
+    }
   }
 ]
