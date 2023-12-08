@@ -931,6 +931,28 @@
       "apellidoPaterno": "MUÑOZ",
       "apellidoMaterno": "ARIAS",
       "codVerifica": "0"
-  }
+    }
+  },
+  {
+    "dni": "47164545",
+    "json": {
+        "success": true,
+        "dni": "47164545",
+        "nombres": "BEATRIZ ANTONIA",
+        "apellidoPaterno": "PEÑA",
+        "apellidoMaterno": "FLORES",
+        "codVerifica": 9
+    }
+  },
+  {
+    "dni": "46866718",
+    "json": {
+        "success": true,
+        "dni": "46866718",
+        "nombres": "ORLANDO ROBINSON PAUL",
+        "apellidoPaterno": "DELGADO",
+        "apellidoMaterno": "CERQUERA",
+        "codVerifica": 7
+    }
   }
 ]
