@@ -954,5 +954,16 @@
         "apellidoMaterno": "CERQUERA",
         "codVerifica": 7
     }
+  },
+  {
+    "dni": "47507504",
+    "json": {
+        "success": true,
+        "dni": "47507504",
+        "nombres": "JHAM CARLOS",
+        "apellidoPaterno": "VILLEGAS",
+        "apellidoMaterno": "RAMÍREZ",
+        "codVerifica": 6
+    }
   }
 ]
