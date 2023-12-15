@@ -965,5 +965,16 @@
         "apellidoMaterno": "RAMÍREZ",
         "codVerifica": 6
     }
+  },
+  {
+    "dni": "42062731",
+    "json": {
+        "success": true,
+        "dni": "42062731",
+        "nombres": "JANET LIZ",
+        "apellidoPaterno": "CABRERA",
+        "apellidoMaterno": "ROJAS",
+        "codVerifica": 9
+    }
   }
 ]
