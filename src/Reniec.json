@@ -976,5 +976,16 @@
         "apellidoMaterno": "ROJAS",
         "codVerifica": 9
     }
+  },
+  {
+    "dni": "71712106",
+    "json": {
+        "success": true,
+        "dni": "71712106",
+        "nombres": "DENNIS MANUEL",
+        "apellidoPaterno": "HERNANDEZ",
+        "apellidoMaterno": "ZAMBRANO",
+        "codVerifica": 6
+    }
   }
 ]
