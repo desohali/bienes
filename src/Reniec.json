@@ -987,5 +987,27 @@
         "apellidoMaterno": "ZAMBRANO",
         "codVerifica": 6
     }
+  },
+  {
+    "dni": "46795155",
+    "json": {
+        "success": true,
+        "dni": "46795155",
+        "nombres": "SILVIA YESENIA",
+        "apellidoPaterno": "GUERRERO",
+        "apellidoMaterno": "MARROQUIN",
+        "codVerifica": 9
+    }
+  },
+  {
+    "dni": "72202556",
+    "json": {
+        "success": true,
+        "dni": "72202556",
+        "nombres": "JOSE RONNY",
+        "apellidoPaterno": "MENDOZA",
+        "apellidoMaterno": "QUIROZ",
+        "codVerifica": 4
+    }
   }
 ]
