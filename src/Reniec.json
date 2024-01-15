@@ -1075,5 +1075,27 @@
       "apellidoMaterno": "LLANOS",
       "codVerifica": 2
     }
+  },
+  {
+    "dni": "78109085",
+    "json": {
+        "success": true,
+        "dni": "78109085",
+        "nombres": "LILIANA NATALI",
+        "apellidoPaterno": "CARRASCO",
+        "apellidoMaterno": "LLAMOCTANTA",
+        "codVerifica": 7
+    }
+  },
+  {
+    "dni": "73490025",
+    "json": {
+        "success": true,
+        "dni": "73490025",
+        "nombres": "KEEVIN JONATHAN",
+        "apellidoPaterno": "ALTAMIRANO",
+        "apellidoMaterno": "DIAZ",
+        "codVerifica": 5
+    }
   }
 ]
