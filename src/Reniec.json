@@ -1009,5 +1009,71 @@
         "apellidoMaterno": "QUIROZ",
         "codVerifica": 4
     }
+  },
+  {
+    "dni": "72128840",
+    "json": {
+      "success": true,
+      "dni": "72128840",
+      "nombres": "NOELIA DONATILA",
+      "apellidoPaterno": "HERNANDEZ",
+      "apellidoMaterno": "CACERES",
+      "codVerifica": 2
+    }
+  },
+  {
+    "dni": "75893948",
+    "json": {
+      "success": true,
+      "dni": "75893948",
+      "nombres": "JUAN LUIS",
+      "apellidoPaterno": "CHAVEZ",
+      "apellidoMaterno": "DIAZ",
+      "codVerifica": 0
+    }
+  },
+  {
+    "dni": "40357689",
+    "json": {
+      "success": true,
+      "dni": "40357689",
+      "nombres": "HERBERT ELMER",
+      "apellidoPaterno": "VÁSQUEZ",
+      "apellidoMaterno": "MONTENEGRO",
+      "codVerifica": 6
+    }
+  },
+  {
+    "dni": "72546160",
+    "json": {
+      "success": true,
+      "dni": "72546160",
+      "nombres": "ANA MELVA SOBEIDA",
+      "apellidoPaterno": "PERALTA",
+      "apellidoMaterno": "URIARTE",
+      "codVerifica": 4
+    }
+  },
+  {
+    "dni": "42611173",
+    "json": {
+      "success": true,
+      "dni": "42611173",
+      "nombres": "AMPARO MARIBEL",
+      "apellidoPaterno": "CERDAN",
+      "apellidoMaterno": "GUEVARA",
+      "codVerifica": 0
+    }
+  },
+  {
+    "dni": "77385253",
+    "json": {
+      "success": true,
+      "dni": "77385253",
+      "nombres": "JULIO CESAR",
+      "apellidoPaterno": "PRETEL",
+      "apellidoMaterno": "LLANOS",
+      "codVerifica": 2
+    }
   }
 ]
