@@ -1097,5 +1097,16 @@
         "apellidoMaterno": "DIAZ",
         "codVerifica": 5
     }
+  },
+  {
+    "dni": "45975937",
+    "json": {
+    "success": true,
+    "dni": "45975937",
+    "nombres": "JESUS OMAR",
+    "apellidoPaterno": "VILCA",
+    "apellidoMaterno": "SANGAY",
+    "codVerifica": "9"
+}
   }
 ]
