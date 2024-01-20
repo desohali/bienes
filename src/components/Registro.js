@@ -159,8 +159,8 @@ function Registro() {
 
   React.useEffect(() => {
     if (usuario) {
-      fetchListar(usuario).then((response) => {
-        setlist(response);
+      fetchListar(usuario).then(({ data }) => {
+        setlist(data);
       });
     }
   }, [usuario]);
@@ -222,7 +222,8 @@ function Registro() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         canvas.height = 0;
         // limpiamos la imagen fin
-        await fetchListar();
+        const { data } = await fetchListar();
+        setlist(data);
         swal("", `Se ${values._id ? 'actualizó' : 'registró'} correctamente!`, "success");
       } catch (error) {
         swal("", "El sistema esta fuera de servicio, gracias!", "warning");
