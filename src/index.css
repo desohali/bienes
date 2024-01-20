@@ -5,6 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Al menos el 100% del viewport height (altura de la ventana del navegador) */
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.layout-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+  align-items: flex-start;
 }
 
 code {
@@ -12,6 +30,6 @@ code {
     monospace;
 }
 
-.css-mhc70k-MuiGrid-root>.MuiGrid-item{
-  padding-top: 12px!important;
+.css-mhc70k-MuiGrid-root>.MuiGrid-item {
+  padding-top: 12px !important;
 }

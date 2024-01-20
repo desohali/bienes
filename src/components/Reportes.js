@@ -1,21 +1,15 @@
 import * as React from 'react';
-
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
 import { LoadingButton } from '@mui/lab';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-import { Chip, Divider, Alert, Button, ButtonGroup, FormControl, Typography, Card, InputLabel, Select, Box, Grid, TextField } from '@mui/material';
+import { Chip, Alert, FormControl, Typography, Card, InputLabel, Select, Box, Grid, TextField } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
-const options = ['Reporte completo', 'Reporte por fecha'];
+export default function Reportes() {
 
-export default function SplitButton() {
+  const { password } = useParams();
 
-  const [fecha, setfecha] = React.useState(new Date().toLocaleDateString().split("/").reverse().join("-"))
+  const [fecha, setfecha] = React.useState(new Date().toISOString().split("T")[0]);
   const [age, setAge] = React.useState('ReporteTotal');
   const [data, setdata] = React.useState({});
   const [loading, setloading] = React.useState(false);
@@ -45,7 +39,7 @@ export default function SplitButton() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${age}${new Date().toLocaleDateString().split("/").reverse().join("-")}.xlsx`; // Cambia 'nombre_del_archivo' por el nombre que desees para el archivo
+      a.download = `${age}${new Date().toISOString().split("T")[0]}.xlsx`; // Cambia 'nombre_del_archivo' por el nombre que desees para el archivo
       a.style.display = 'none'; // Ocultar el enlace
       document.body.appendChild(a);
       a.click();
@@ -63,6 +57,10 @@ export default function SplitButton() {
     }
     )();
   }, [age, fecha]);
+
+  if (password != "homero2024") {
+    return null;
+  }
 
 
   return (
@@ -103,7 +101,7 @@ export default function SplitButton() {
         <Grid item xs={12} sm={2} md={2} lg={4}>
           {/* <Button fullWidth variant="contained" onClick={reporteBienes.bind(null, true)}>Descargar excel</Button> */}
           <LoadingButton
-            style={{ width: "100%", display:"none" }}
+            style={{ width: "100%", display: "none" }}
             color='primary'
             variant='contained'
             loading={loading}

@@ -1,27 +1,21 @@
 import * as React from 'react';
-import { useFormik } from 'formik'
-import * as Yup from "yup"
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 import SaveIcon from '@mui/icons-material/Save';
 import { LoadingButton } from '@mui/lab';
 import swal from 'sweetalert';
-import AppBar from '@mui/material/AppBar';
 
 import Autocomplete from '@mui/material/Autocomplete';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import PermMediaIcon from '@mui/icons-material/PermMedia';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { Chip, Divider, Button, ButtonGroup, Box, Grid, TextField } from '@mui/material';
-import TableBienes from './TableBienes'
 import CardBienes from './CardBienes'
 import Catalogo_Nacional from '../Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
-import Reniec from '../Reniec.json'; // Ruta relativa al archivo JSON
-import Correlativos_Excel from '../Correlativos_Excel.json'; // Ruta relativa al archivo JSON
-import { useNavigate } from "react-router-dom";
 
-/* let Catalogo_Nacional_Map = Catalogo_Nacional.map(({ Codigo }) => Codigo);
-Catalogo_Nacional_Map = [...new Set(Catalogo_Nacional_Map)];
-Catalogo_Nacional_Map = Catalogo_Nacional.filter(({ Codigo }) => Catalogo_Nacional_Map.includes(Codigo)); */
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../features/userSlice';
+
 
 const regex = /[a-zA-Z0-9]/;
 
@@ -57,7 +51,7 @@ const formikBasicInformationSchema = Yup.object().shape({
 const ordenDeBienes = [
   "_id",
   "codigo",
-  "codigoCorrelativo",
+  /* "codigoCorrelativo", */
   "numeroEtiqueta",
   "marca",
   "modelo",
@@ -102,72 +96,74 @@ function resizeImage(img, { width, height }) {
     window.URL.revokeObjectURL(this.src);
 
   }, false);
-}
+};
+
+const listarEnventario = async (dni) => {
+  const formData = new FormData();
+  formData.append("inventariador", dni);
+
+  const response = await fetch("https://yocreoquesipuedohacerlo.com/listarEnventario", {
+    method: "post",
+    body: formData
+  });
+  const { status, message = "Usuario no autorizado!", data, count } = await response.json();
+  /* if (!status) {
+    swal("", message, "warning");
+  } */
+
+  return { data, count };
+};
+
+const fetchListar = async (usuario) => {
+  if (usuario) {
+    const bienes = await listarEnventario(usuario?.dni);
+    const bienesMap = []
+    for (const bien of (bienes?.data || [])) {
+      const binesOrdenados = {};
+      for (const key of ordenDeBienes) {
+        binesOrdenados[key] = bien[key];
+      }
+      bienesMap.push(binesOrdenados);
+    }
+
+    return { ...bienes, data: bienesMap };
+
+  }
+};
 
 function Registro() {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user: usuario } = useSelector((state) => state.user);
 
   const inputFileRef = React.useRef();
 
-  const [usuario, setusuario] = React.useState("");
-
   React.useEffect(() => {
-    const dniInventariador = localStorage.getItem("inventariador");
-    if (dniInventariador) {
-      let nombresUsuario = Reniec.find(({ dni }) => dni.trim() == dniInventariador.trim());
-      nombresUsuario = ((nombresUsuario || {}).json?.success) ?
-        `${nombresUsuario.json.nombres} ${nombresUsuario.json.apellidoPaterno} ${nombresUsuario.json.apellidoMaterno}` :
-        dniInventariador || ""
-      setusuario(`${nombresUsuario.charAt(0).toUpperCase()}${nombresUsuario.slice(1).toLowerCase()}`);
+    let inventariador = localStorage.getItem("newInventariador");
+    if (inventariador) {
+      inventariador = JSON.parse(inventariador);
+      if (inventariador?.estado) {
+        dispatch(setUser(inventariador));
+      } else {
+        navigate('/');
+      }
     } else {
       navigate('/');
     }
   }, []);
 
 
-  const listarEnventario = async () => {
-    const formData = new FormData();
-    formData.append("inventariador", localStorage.getItem("inventariador"));
-    const response = await fetch("https://yocreoquesipuedohacerlo.com/listarEnventario", {
-      method: "post",
-      body: formData
-    });
-    const json = await response.json();
-    return json;
-  };
-
   const [list, setlist] = React.useState([]);
 
-  const fetchListar = async () => {
-    if (localStorage.getItem("inventariador")) {
-
-      let bienes = await listarEnventario();
-      bienes.data = (bienes.data || []).map((data) => {
-        let codigoCorrelativo = Correlativos_Excel.find(({ codigo }) => codigo == data.codigo);
-        codigoCorrelativo = codigoCorrelativo ?
-          `${data.codigo}${(data.correlativoFecha + codigoCorrelativo.max.correlativo).toString().padStart(4, '0')}` :
-          `${data.codigo}${data.correlativoFecha.toString().padStart(4, '0')}`
-          ;
-        return { ...data, codigoCorrelativo }
-      });
-
-      const bienesMap = []
-      for (const bien of (bienes?.data || [])) {
-        const binesOrdenados = {};
-        for (const key of ordenDeBienes) {
-          binesOrdenados[key] = bien[key];
-        }
-        bienesMap.push(binesOrdenados);
-      }
-
-      setlist({ ...bienes, data: bienesMap });
-    }
-  }
-
   React.useEffect(() => {
-    (async () => { await fetchListar(); })();
-  }, []);
+    if (usuario) {
+      fetchListar(usuario).then((response) => {
+        setlist(response);
+      });
+    }
+  }, [usuario]);
 
 
   // form basic information
@@ -191,6 +187,10 @@ function Registro() {
     validationSchema: formikBasicInformationSchema,
     onSubmit: async (values) => {
       try {
+        if (!usuario?.dni) {
+          navigate('/');
+          return;
+        }
         const [firstImage] = inputFileRef.current.files;
         const formData = new FormData();
         for (const key in values) {
@@ -202,13 +202,17 @@ function Registro() {
           formData.append("imagen", imageDataURL);
         }
 
-        formData.append("inventariador", localStorage.getItem("inventariador"));
+        formData.append("inventariador", usuario?.dni);
         const response = await fetch("https://yocreoquesipuedohacerlo.com/enventario", {
           method: "post",
           body: formData
         });
 
-        await response.json();
+        const { status, message = "Usuario no autorizado!" } = await response.json();
+        if (!status) {
+          swal("", message, "warning");
+          return;
+        }
 
         formikBasicInformation.resetForm();
         // limpiamos la imagen
@@ -227,26 +231,15 @@ function Registro() {
   });
 
 
-
-
   const clonarBien = (data) => {
     for (const key in data) {
       formikBasicInformation.setFieldValue(key, data[key] || "");
     }
-  }
+  };
 
 
   return (
     <Box>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" component="div" align='center' sx={{ flexGrow: 1 }}>
-              {usuario}
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Box>
       <Box style={{ padding: '6px' }}>
         <Divider style={{ marginBottom: "25px" }}>
           <Chip label="Registro de bienes" color="success" />
@@ -455,8 +448,6 @@ function Registro() {
                 <div style={{ width: "100%", textAlign: "center" }}><canvas id="canvasPerfil" height={0}></canvas></div>
               </Grid>
 
-
-
               <Grid item xs={12} sm={12} md={6} lg={6}>
 
                 <ButtonGroup style={{ width: "100%" }} variant="contained" aria-label="outlined primary button group">
@@ -498,7 +489,8 @@ function Registro() {
           <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
         </Grid>
         <Divider style={{ marginTop: "25px", marginBottom: "25px" }}>
-          <Chip label={`${usuario.split(" ")[0]} has registrado ${(list?.count || 0)} bienes!`} color="success" />
+
+          <Chip label={`${usuario?.nombres.charAt(0).toUpperCase()}${usuario?.nombres.slice(1).toLowerCase()} has registrado ${(list?.count || 0)} bienes!`} color="success" />
         </Divider>
         {/* <TableBienes rows={(list?.data || [])} callback={clonarBien} /> */}
         <CardBienes rows={(list?.data || [])} callback={clonarBien} />
