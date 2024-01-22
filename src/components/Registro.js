@@ -222,7 +222,7 @@ function Registro() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         canvas.height = 0;
         // limpiamos la imagen fin
-        const response2 = await fetchListar();
+        const response2 = await fetchListar(usuario);
         setlist(response2);
         swal("", `Se ${values._id ? 'actualizó' : 'registró'} correctamente!`, "success");
       } catch (error) {
