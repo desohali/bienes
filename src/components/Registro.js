@@ -304,7 +304,7 @@ function Registro() {
                   <React.Fragment>
                     <Typography color="inherit">Ultimo bien registrado</Typography>
                     {ultimoBien && <b>
-                      {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} ${ultimoBien?.numeroEtiqueta}`}
+                      {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} # Etiqueta : ${ultimoBien?.numeroEtiqueta}`}
                     </b>}
                   </React.Fragment>
                 }
@@ -314,7 +314,7 @@ function Registro() {
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  {ultimoBien ? <strong> {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} ${ultimoBien?.numeroEtiqueta}`}</strong> : ""}
+                  {ultimoBien ? <strong> {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} : ${ultimoBien?.numeroEtiqueta}`}</strong> : ""}
                 </AccordionSummary>
               </HtmlTooltip>
               <AccordionDetails>
