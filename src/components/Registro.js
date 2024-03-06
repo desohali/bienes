@@ -8,14 +8,28 @@ import swal from 'sweetalert';
 import Autocomplete from '@mui/material/Autocomplete';
 import PermMediaIcon from '@mui/icons-material/PermMedia';
 import ReplayIcon from '@mui/icons-material/Replay';
-import { Chip, Divider, Button, ButtonGroup, Box, Grid, TextField } from '@mui/material';
+import { Chip, Divider, Button, ButtonGroup, Box, Grid, TextField, Accordion, AccordionSummary, AccordionDetails, Alert, Typography } from '@mui/material';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import CardBienes from './CardBienes'
 import Catalogo_Nacional from '../Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../features/userSlice';
+import { setUltimoBien, setUser } from '../features/userSlice';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { styled } from '@mui/material/styles';
 
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} placement="top" classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}));
 
 const regex = /[a-zA-Z0-9]/;
 
@@ -136,7 +150,7 @@ function Registro() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user: usuario } = useSelector((state) => state.user);
+  const { user: usuario, ultimoBien } = useSelector((state) => state.user);
 
   const inputFileRef = React.useRef();
 
@@ -156,14 +170,45 @@ function Registro() {
 
 
   const [list, setlist] = React.useState([]);
+  console.log('list', list)
 
   React.useEffect(() => {
     if (usuario) {
       fetchListar(usuario).then((response) => {
         setlist(response);
+        const [firstBien] = (response?.data || []);
+        dispatch(setUltimoBien(firstBien));
       });
     }
   }, [usuario]);
+
+
+  // atajos de teclado
+  React.useEffect(() => {
+    const handleKeyPress = (event) => {
+      // Verifica si la tecla presionada es 'Ctrl + S'
+      const keyPressed = event.key.toLowerCase();
+      if (event.ctrlKey && event.altKey && keyPressed === 'g') {
+        formikBasicInformation.submitForm();
+      }
+
+      const [firstBien = {}] = (list?.data || []);
+      if (event.ctrlKey && event.altKey && keyPressed === 'u') {
+        formikBasicInformation.resetForm();
+        for (const key in firstBien) {
+          formikBasicInformation.setFieldValue(key, firstBien[key] || "");
+        }
+      }
+    };
+
+    // Agregar un listener para el evento 'keydown'
+    window.addEventListener('keydown', handleKeyPress);
+
+    // Remover el listener cuando el componente se desmonte
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [list]);
 
 
   // form basic information
@@ -175,11 +220,11 @@ function Registro() {
       dependencia: '',
       responsable: '',
       numeroEtiqueta: '',
-      marca: '',
-      modelo: '',
-      serie: '',
+      marca: 'S/M',
+      modelo: 'S/M',
+      serie: 'S/S',
       color: '',
-      dimensiones: '',
+      dimensiones: 'S/D',
       estado: '',
       observaciones: '',
       codigo: '',
@@ -224,6 +269,11 @@ function Registro() {
         // limpiamos la imagen fin
         const response2 = await fetchListar(usuario);
         setlist(response2);
+
+        const [firstBien] = (response2?.data || []);
+        dispatch(setUltimoBien(firstBien));
+
+
         swal("", `Se ${values._id ? 'actualizó' : 'registró'} correctamente!`, "success");
       } catch (error) {
         swal("", "El sistema esta fuera de servicio, gracias!", "warning");
@@ -245,8 +295,35 @@ function Registro() {
         <Divider style={{ marginBottom: "25px" }}>
           <Chip label="Registro de bienes" color="success" />
         </Divider>
-        <Grid container spacing={0}>
-          <Grid item xs={12} sm={1} md={2} lg={3}></Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={1} md={2} lg={3}>
+
+            <Accordion defaultExpanded>
+              <HtmlTooltip
+                title={
+                  <React.Fragment>
+                    <Typography color="inherit">Ultimo bien registrado</Typography>
+                    {ultimoBien && <b>
+                      {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} ${ultimoBien?.numeroEtiqueta}`}
+                    </b>}
+                  </React.Fragment>
+                }
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                >
+                  {ultimoBien ? <strong> {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} ${ultimoBien?.numeroEtiqueta}`}</strong> : ""}
+                </AccordionSummary>
+              </HtmlTooltip>
+              <AccordionDetails>
+                <Alert severity="info">Ctrl + Alt + G. (Registrar un bien)</Alert>
+                <Alert severity="info">Ctrl + Alt + U. (Clonar el ultimo bien)</Alert>
+              </AccordionDetails>
+            </Accordion>
+
+          </Grid>
 
           <Grid item xs={12} sm={10} md={8} lg={6}>
             <Grid container spacing={2}>
