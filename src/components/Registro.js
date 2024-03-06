@@ -302,7 +302,7 @@ function Registro() {
               <HtmlTooltip
                 title={
                   <React.Fragment>
-                    <Typography color="inherit">Ultimo bien registrado</Typography>
+                    <Typography color="inherit">{ultimoBien ? "Ultimo bien registrado" : "Ningún bien registrado"}</Typography>
                     {ultimoBien && <b>
                       {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} # Etiqueta : ${ultimoBien?.numeroEtiqueta}`}
                     </b>}
@@ -314,7 +314,9 @@ function Registro() {
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  {ultimoBien ? <strong> {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} : ${ultimoBien?.numeroEtiqueta}`}</strong> : ""}
+                  {ultimoBien
+                    ? <strong> {`${Catalogo_Nacional.find(({ Codigo }) => Codigo == ultimoBien.codigo)?.label ?? ''} : ${ultimoBien?.numeroEtiqueta}`}</strong>
+                    : <strong>{"Ningún bien registrado".toUpperCase()}</strong>}
                 </AccordionSummary>
               </HtmlTooltip>
               <AccordionDetails>
