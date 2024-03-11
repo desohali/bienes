@@ -282,7 +282,7 @@ function Registro() {
   });
 
 
-  const clonarBien = (data) => {
+  const clonarBien = ({ _id, ...data }) => {
     for (const key in data) {
       formikBasicInformation.setFieldValue(key, data[key] || "");
     }
