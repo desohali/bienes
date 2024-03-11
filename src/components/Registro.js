@@ -195,7 +195,8 @@ function Registro() {
       const [firstBien = {}] = (list?.data || []);
       if (event.ctrlKey && event.altKey && keyPressed === 'u') {
         formikBasicInformation.resetForm();
-        for (const key in firstBien) {
+        const {_id, ...data} = firstBien;
+        for (const key in data) {
           formikBasicInformation.setFieldValue(key, firstBien[key] || "");
         }
       }
@@ -282,7 +283,7 @@ function Registro() {
   });
 
 
-  const clonarBien = ({ _id, ...data }) => {
+  const clonarBien = (data) => {
     for (const key in data) {
       formikBasicInformation.setFieldValue(key, data[key] || "");
     }
