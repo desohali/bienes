@@ -171,7 +171,7 @@ function Registro() {
 
 
   const [list, setlist] = React.useState([]);
-  const [codigo, setcodigo] = React.useState();
+  /* const [codigo, setcodigo] = React.useState(); */
 
   React.useEffect(() => {
     if (usuario) {
@@ -197,8 +197,8 @@ function Registro() {
       if (event.ctrlKey && event.altKey && keyPressed === 'u') {
         formikBasicInformation.resetForm();
         const { _id, ...data } = firstBien;
-        setcodigo(data?.codigo);
-        console.log(data);
+        /* setcodigo(data?.codigo);
+        console.log(data); */
         for (const key in data) {
           formikBasicInformation.setFieldValue(key, firstBien[key] || "");
         }
@@ -341,12 +341,13 @@ function Registro() {
                   options={Catalogo_Nacional}
                   getOptionLabel={(option) => option.label || ''}
                   onChange={(event, newValue) => {
+                    formikBasicInformation.resetForm();
                     formikBasicInformation.setFieldValue('codigo', newValue?.Codigo || "");
-                    if (newValue) {
+                    /* if (newValue) {
                       setcodigo(newValue?.Codigo);
                     } else {
                       setcodigo("");
-                    }
+                    } */
                   }}
                   renderInput={(params) => <TextField {...params} label="Que bien desea registrar?" />}
                 />
@@ -357,12 +358,19 @@ function Registro() {
                   id='new-codigo'
                   getOptionLabel={(option) => option.label || ''}
                   onChange={(event, newValue) => {
+                    formikBasicInformation.resetForm();
                     formikBasicInformation.setFieldValue('codigo', newValue?.key || "");
-                    if (newValue) {
-                      setcodigo(newValue?.key);
-                    } else {
-                      setcodigo("");
-                    }
+                    formikBasicInformation.setFieldValue('numeroEtiqueta', newValue?.nro_serie || "");
+                    formikBasicInformation.setFieldValue('marca', newValue?.marca || "");
+                    formikBasicInformation.setFieldValue('modelo', newValue?.modelo || "");
+                    formikBasicInformation.setFieldValue('color', newValue?.COLOR || "");
+                    formikBasicInformation.setFieldValue('dimensiones', newValue?.merdidas || "");
+                    formikBasicInformation.setFieldValue('estado', newValue?.estado_conserv || "");
+                    formikBasicInformation.setFieldValue('observaciones', newValue?.observaciones || "");
+                    formikBasicInformation.setFieldValue('responsable', newValue?.empleado_final || "");
+                    formikBasicInformation.setFieldValue('serie', newValue?.nro_serie || "");
+                    formikBasicInformation.setFieldValue('dependencia', newValue?.centro_costo || "");
+
                   }}
                   options={inventory}
                   renderInput={(params) => <TextField key={params.id}  {...params} label="Seleccione código" />}
