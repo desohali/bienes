@@ -364,7 +364,7 @@ function Registro() {
                     formikBasicInformation.setFieldValue('marca', newValue?.marca || "");
                     formikBasicInformation.setFieldValue('modelo', newValue?.modelo || "");
                     formikBasicInformation.setFieldValue('color', newValue?.COLOR || "");
-                    formikBasicInformation.setFieldValue('dimensiones', newValue?.merdidas || "");
+                    formikBasicInformation.setFieldValue('dimensiones', newValue?.medidas || "");
                     formikBasicInformation.setFieldValue('estado', newValue?.estado_conserv || "");
                     formikBasicInformation.setFieldValue('observaciones', newValue?.observaciones || "");
                     formikBasicInformation.setFieldValue('responsable', newValue?.empleado_final || "");
