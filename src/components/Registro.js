@@ -351,10 +351,10 @@ function Registro() {
                   renderInput={(params) => <TextField {...params} label="Que bien desea registrar?" />}
                 />
               </Grid>
-              {!Boolean(codigo) && <Grid item xs={12} sm={12} md={6} lg={6}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Autocomplete
                   disablePortal
-                  id='newcodigo'
+                  id='new-codigo'
                   getOptionLabel={(option) => option.label || ''}
                   onChange={(event, newValue) => {
                     formikBasicInformation.setFieldValue('codigo', newValue?.key || "");
@@ -367,12 +367,13 @@ function Registro() {
                   options={inventory}
                   renderInput={(params) => <TextField key={params.id}  {...params} label="Seleccione código" />}
                 />
-              </Grid>}
-              {Boolean(codigo) && <Grid item xs={12} sm={12} md={6} lg={6}>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
                   inputProps={{ maxLength: 100 }}
                   fullWidth
-                  size="large"
+                  disabled
+                  size="small"
                   id='codigo'
                   label='Código'
                   variant='outlined'
@@ -382,10 +383,10 @@ function Registro() {
                   error={formikBasicInformation.touched.codigo && Boolean(formikBasicInformation.errors.codigo)}
                   helperText={formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo}
                 />
-              </Grid>}
-              {formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo && <Grid item xs={12} sm={12} md={12} lg={12}>
+              </Grid>
+              {/* {formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo && <Grid item xs={12} sm={12} md={12} lg={12}>
                 <Chip label="Código es requerido" color="error" style={{ width: "100%" }} />
-              </Grid>}
+              </Grid>} */}
 
 
               <Grid item xs={6} sm={6} md={6} lg={6}>
