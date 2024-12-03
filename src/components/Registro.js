@@ -12,6 +12,8 @@ import { Chip, Divider, Button, ButtonGroup, Box, Grid, TextField, Accordion, Ac
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import CardBienes from './CardBienes'
 import Catalogo_Nacional from '../Catalogo_Nacional.json'; // Ruta relativa al archivo JSON
+import inventory from '../inventory.json'; // Ruta relativa al archivo JSON
+
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,7 +81,6 @@ const ordenDeBienes = [
 ];
 
 function resizeImage(img, { width, height }) {
-
 
   const canvas = document.getElementById("canvasPerfil");
   const ctx = canvas.getContext("2d");
@@ -170,7 +171,7 @@ function Registro() {
 
 
   const [list, setlist] = React.useState([]);
-  console.log('list', list)
+  const [codigo, setcodigo] = React.useState();
 
   React.useEffect(() => {
     if (usuario) {
@@ -195,7 +196,9 @@ function Registro() {
       const [firstBien = {}] = (list?.data || []);
       if (event.ctrlKey && event.altKey && keyPressed === 'u') {
         formikBasicInformation.resetForm();
-        const {_id, ...data} = firstBien;
+        const { _id, ...data } = firstBien;
+        setcodigo(data?.codigo);
+        console.log(data);
         for (const key in data) {
           formikBasicInformation.setFieldValue(key, firstBien[key] || "");
         }
@@ -233,6 +236,7 @@ function Registro() {
     validationSchema: formikBasicInformationSchema,
     onSubmit: async (values) => {
       try {
+
         if (!usuario?.dni) {
           navigate('/');
           return;
@@ -330,23 +334,45 @@ function Registro() {
 
           <Grid item xs={12} sm={10} md={8} lg={6}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Autocomplete
                   disablePortal
                   id="combo-box-demo"
                   options={Catalogo_Nacional}
+                  getOptionLabel={(option) => option.label || ''}
                   onChange={(event, newValue) => {
                     formikBasicInformation.setFieldValue('codigo', newValue?.Codigo || "");
+                    if (newValue) {
+                      setcodigo(newValue?.Codigo);
+                    } else {
+                      setcodigo("");
+                    }
                   }}
                   renderInput={(params) => <TextField {...params} label="Que bien desea registrar?" />}
                 />
               </Grid>
-              <Grid item xs={6} sm={6} md={6} lg={6}>
+              {!Boolean(codigo) && <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Autocomplete
+                  disablePortal
+                  id='newcodigo'
+                  getOptionLabel={(option) => option.label || ''}
+                  onChange={(event, newValue) => {
+                    formikBasicInformation.setFieldValue('codigo', newValue?.key || "");
+                    if (newValue) {
+                      setcodigo(newValue?.key);
+                    } else {
+                      setcodigo("");
+                    }
+                  }}
+                  options={inventory}
+                  renderInput={(params) => <TextField key={params.id}  {...params} label="Seleccione código" />}
+                />
+              </Grid>}
+              {Boolean(codigo) && <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
                   inputProps={{ maxLength: 100 }}
                   fullWidth
-                  disabled
-                  size="small"
+                  size="large"
                   id='codigo'
                   label='Código'
                   variant='outlined'
@@ -356,7 +382,11 @@ function Registro() {
                   error={formikBasicInformation.touched.codigo && Boolean(formikBasicInformation.errors.codigo)}
                   helperText={formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo}
                 />
-              </Grid>
+              </Grid>}
+              {formikBasicInformation.touched.codigo && formikBasicInformation.errors.codigo && <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Chip label="Código es requerido" color="error" style={{ width: "100%" }} />
+              </Grid>}
+
 
               <Grid item xs={6} sm={6} md={6} lg={6}>
                 <TextField
@@ -528,7 +558,7 @@ function Registro() {
                 </Button>
                 <div style={{ width: "100%", textAlign: "center" }}><canvas id="canvasPerfil" height={0}></canvas></div>
               </Grid>
-
+              <Grid item xs={12} sm={12} md={6} lg={6} />
               <Grid item xs={12} sm={12} md={6} lg={6}>
 
                 <ButtonGroup style={{ width: "100%" }} variant="contained" aria-label="outlined primary button group">
@@ -558,6 +588,8 @@ function Registro() {
                     startIcon={<SaveIcon />}
                     onClick={async () => {
                       await formikBasicInformation.submitForm();
+                      console.log(formikBasicInformation.errors);
+
                     }}>
                     {Boolean(formikBasicInformation.values._id) ? "Actualizar" : "Registrar"}
                   </LoadingButton>
