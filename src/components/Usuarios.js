@@ -23,7 +23,7 @@ const formikSchema = Yup.object().shape({
 
 const listarInventariadores = async () => {
   const formData = new FormData();
-  const response = await fetch("https://yocreoquesipuedohacerlo.com/listarInventariadores", {
+  const response = await fetch("https://rifas.desohali.com/listarInventariadores", {
     method: "post",
     body: formData
   });
@@ -64,7 +64,7 @@ const Usuarios = () => {
           formData.append(key, values[key]);
         }
 
-        const response = await fetch("https://yocreoquesipuedohacerlo.com/registrarInventaridor", {
+        const response = await fetch("https://rifas.desohali.com/registrarInventaridor", {
           method: "post",
           body: formData
         });
